@@ -1,15 +1,14 @@
 ﻿namespace Dsw2025Ej8.Domain;
 
-public class CuentaBancaria
+public abstract class CuentaBancaria
 {
-    private TipoCuenta _tipo;
-    private string _numero;
-    private decimal _saldo;
-    private Estado _estado;
-    private decimal _tasaDeInteres;
-    private decimal _limiteDeDescubierto;
-    private decimal _comision;
-    private string[] _titulares;
+    public TipoCuenta _tipo {  get; }
+    public string _numero { get; }
+    public decimal _saldo { get; protected set; }
+    public Estado _estado { get; set; }
+    
+
+    public string[] _titulares { get; }
 
     public CuentaBancaria(string numero, decimal saldo, TipoCuenta tipo, string[] titulares)
     {
@@ -19,89 +18,90 @@ public class CuentaBancaria
         _estado = Estado.Activa;
         _titulares = titulares;
     }
-    #region Getters/Setters
-    public string GetNumero()
-    {
-        return _numero;
-    }
+    /* #region Getters/Setters
+     public string GetNumero()
+     {
+         return _numero;
+     }
 
-    public decimal GetSaldo()
-    {
-        return _saldo;
-    }
-    public TipoCuenta GetTipo()
-    {
-        return _tipo;
-    }
+     public decimal GetSaldo()
+     {
+         return _saldo;
+     }
+     public TipoCuenta GetTipo()
+     {
+         return _tipo;
+     }
 
-    public Estado GetEstado()
-    {
-        return _estado;
-    }
+     public Estado GetEstado()
+     {
+         return _estado;
+     }
 
-    public void SetEstado(Estado estado)
-    {
-        _estado = estado;
-    }
+     public void SetEstado(Estado estado)
+     {
+         _estado = estado;
+     }
 
-    public decimal GetTasaDeInteres()
-    {
-        return _tasaDeInteres;
-    }
+     public decimal GetTasaDeInteres()
+     {
+         return _tasaDeInteres;
+     }
 
-    public void SetTasaDeInteres(decimal tasaDeInteres)
-    {
-        _tasaDeInteres = tasaDeInteres;
-    }
+     public void SetTasaDeInteres(decimal tasaDeInteres)
+     {
+         _tasaDeInteres = tasaDeInteres;
+     }
 
-    public decimal GetLimiteDeDescubierto()
-    {
-        return _limiteDeDescubierto;
-    }
+     public decimal GetLimiteDeDescubierto()
+     {
+         return _limiteDeDescubierto;
+     }
 
-    public void SetLimiteDeDescubierto(decimal limiteDeDescubierto)
-    {
-        _limiteDeDescubierto = limiteDeDescubierto;
-    }
+     public void SetLimiteDeDescubierto(decimal limiteDeDescubierto)
+     {
+         _limiteDeDescubierto = limiteDeDescubierto;
+     }
 
-    public decimal GetComision()
-    {
-        return _comision;
-    }
+     public decimal GetComision()
+     {
+         return _comision;
+     }
 
-    public void SetComision(decimal comision)
-    {
-        _comision = comision;
-    }
+     public void SetComision(decimal comision)
+     {
+         _comision = comision;
+     }
 
-    public string[] GetTitulares()
-    {
-        return _titulares;
-    }
-    #endregion
+     public string[] GetTitulares()
+     {
+         return _titulares;
+     }
+     #endregion
+    */
 
-    public void Depositar(decimal monto)
-    {
+    public abstract void Depositar(decimal monto);
+    /*{
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
             _saldo += monto;
         }
         else if (_tipo == TipoCuenta.CuentaCorriente)
         {
-            monto -= monto * _comision;
+            monto -= monto * comision;
             _saldo += monto;
         }
-    }
+    }*/
 
-    public void Retirar(decimal monto)
-    {
+    public abstract void Retirar(decimal monto);
+    /*{
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
             _saldo -= monto;
         }
         else if (_tipo == TipoCuenta.CuentaCorriente)
         {
-            if (_saldo - monto >= -_limiteDeDescubierto)
+            if (_saldo - monto >= - limiteDeDescubierto)
             {
                 _saldo -= monto;
             }
@@ -110,13 +110,13 @@ public class CuentaBancaria
                 _estado = Estado.Suspendida;
             }
         }
-    }
+    }*/
 
-    public void AplicarInteres()
-    {
+    public abstract void AplicarInteres();
+    /*{
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
-            _saldo += _saldo * _tasaDeInteres;
+            _saldo += _saldo * tasaDeInteres;
         }
-    }
+    }*/
 }
