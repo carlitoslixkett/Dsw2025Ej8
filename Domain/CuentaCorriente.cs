@@ -16,6 +16,7 @@ namespace Dsw2025Ej8.Domain
             this.comision = comision;
         }
 
+
         public override void Depositar(decimal monto)
         {
             if (_tipo == TipoCuenta.CajaDeAhorro)
@@ -47,6 +48,9 @@ namespace Dsw2025Ej8.Domain
             }
         }
 
-
+        public void indicarLimite(decimal limiteDeDescubierto)
+        { 
+        this.limiteDeDescubierto = limiteDeDescubierto;
+        }
     }
 }

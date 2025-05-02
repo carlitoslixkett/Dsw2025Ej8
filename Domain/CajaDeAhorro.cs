@@ -30,11 +30,19 @@ namespace Dsw2025Ej8.Domain
                 _saldo -= monto;
             }
         }
-        public override void AplicarInteres()
+        public  void AplicarInteres(decimal tasaDeInteres)
         {
             if (_tipo == TipoCuenta.CajaDeAhorro)
             {
-                _saldo += _saldo * tasaDeInteres;
+
+                if (_estado != Estado.Activa)
+                {
+                    Console.WriteLine($"Error: No se puede operar con la cuenta en estado {_estado}. No se aplica el interés."); ;
+                }
+                else
+                {
+                    _saldo += _saldo * tasaDeInteres;
+                }
             }
         }
     }

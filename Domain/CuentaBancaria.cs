@@ -112,7 +112,7 @@ public abstract class CuentaBancaria
         }
     }*/
 
-    public abstract void AplicarInteres();
+    //public abstract void AplicarInteres();
     /*{
         if (_tipo == TipoCuenta.CajaDeAhorro)
         {
