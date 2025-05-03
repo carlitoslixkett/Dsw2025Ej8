@@ -12,23 +12,42 @@ namespace Dsw2025Ej8.Domain
         {
         }
 
-        public decimal tasaDeInteres { private get; set; }
+        public decimal tasaDeInteres { get; set; }
 
         public override void Depositar(decimal monto)
         {
+            if (_estado != Estado.Activa) {
+                throw new CuentaNoActivaException(_estado);
+            }
+            
+            if (monto <= 0)
+                throw new MontoNoValidoException();
             if (_tipo == TipoCuenta.CajaDeAhorro)
             {
                 _saldo += monto;
             }
-
+            
+            
         }
 
         public override void Retirar(decimal monto)
         {
+            if (_estado != Estado.Activa) {
+                throw new CuentaNoActivaException(_estado);
+            }
+                if (_saldo < monto)
+                {
+                    _estado = Estado.Suspendida;
+                    throw new SaldoInsuficienteException();
+                }             
+                if (monto <= 0)
+                throw new MontoNoValidoException();
             if (_tipo == TipoCuenta.CajaDeAhorro)
             {
                 _saldo -= monto;
             }
+            
+           
         }
         public  void AplicarInteres(decimal tasaDeInteres)
         {
